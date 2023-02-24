@@ -62,6 +62,17 @@ void showScholars(struct Scholars p[20],int k)
 
 }
 
+void datawrite(struct Scholars Newscholar[100],int k)
+
+{
+    FILE *fout = fopen("output.txt","w");
+        fprintf(fout,"%d#%s$%s#%.2f#%d\n",  Newscholar[k].Scholars_Nim,
+                                            Newscholar[k].Scholars_name,
+                                            Newscholar[k].Scholars_Major,
+                                            Newscholar[k].Scholars_Total,
+                                            Newscholar[k].Scholars_Grading);
+    fclose(fout);
+}
 
 int main()
 {
@@ -69,12 +80,12 @@ int main()
     int menu;
 
     struct Scholars p[20];
-    struct Scholars Newscholar;
+    struct Scholars Newscholar[100];
 
     FILE *fp = fopen("data.txt","r");
     while(!feof(fp)){
         
-        fscanf(fp,"%d#%[^#]#%[^#]#",Newscholar.Scholars_Nim[i],Newscholar.Scholars_name[i],Newscholar.Scholars_Major[i]);
+        fscanf(fp,"%d#%[^#]#%[^#]#",Newscholar[i].Scholars_Nim,Newscholar[i].Scholars_name,Newscholar[i].Scholars_Major);
         i++;
     }
     fclose(fp);
@@ -109,12 +120,24 @@ int main()
                 if(i<20)
                 {
                     inputScholars(&p[i]);
+                    for(int counter = 0; counter <100 ; counter++)
+                    {
+                        if (p[counter].Scholars_Nim == Newscholar[i].Scholars_Nim)
+                        {
+                            p[counter].Scholars_Nilai.tugas = Newscholar[i].Scholars_Nilai.tugas;
+                            p[counter].Scholars_Nilai.uts = Newscholar[i].Scholars_Nilai.uts;
+                            p[counter].Scholars_Nilai.uas = Newscholar[i].Scholars_Nilai.uas;
+                            datawrite(&Newscholar[100],counter);
+                        
+                        }
+                        else 
+                        {
+                            
+                        }
+                    }
                     i++;
                     printf("New Students Added\n");
                     k = i;
-
-                    
-
                 }
                 else
                 {
