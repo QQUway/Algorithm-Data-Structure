@@ -78,7 +78,7 @@ void showScholars(struct Scholars p[100],struct Scholars px[100],int k)
 
 }
 
-
+//Rifqi H
 
 int main()
 {
@@ -156,3 +156,4 @@ int main()
     fclose(fN);
 
 }
+//Rifqi Habib Ur Rahman
