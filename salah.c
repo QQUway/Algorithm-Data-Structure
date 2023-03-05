@@ -83,6 +83,7 @@ void print_linked_list() {
     Node *current = head;
         printf("=========================================================================================\n");
         printf("| No. |      NIM      | Name                           |           Jurusan              |\n");
+        printf("=========================================================================================\n");
     while (current != NULL) {
         printf("| %-3d | %-13s | %-30s | %-30s |\n",i, current->nim, current->nama, current->Jurusan);
         current = current->next;
@@ -104,6 +105,7 @@ void display_menu() {
 int main() {
     while (1) {
         system("cls");
+        system("clear");
         display_menu();
         int choice;
         printf("Masukkan pilihan Anda: ");
