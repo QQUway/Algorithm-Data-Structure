@@ -1,0 +1,148 @@
+create database restoran;
+use restoran;
+
+create table employee (
+id_employee varchar(5) not null,
+nama_depan varchar(30) not null,
+nama_belakang varchar(30),
+jabatan varchar(30) not null,
+alamat varchar(30) not null,
+email varchar(30) not null,
+nomor_telepon varchar(15) not null,
+gaji integer not null,
+primary key (id_employee)
+);
+create table customer (
+id_customer varchar(5) not null,
+nama_depan varchar(30) not null,
+nama_belakang varchar(30),
+alamat varchar(30) not null,
+email varchar(30) not null,
+nomor_telepon varchar(15) not null,
+primary key (id_customer)
+);
+create table paket (
+id_paket varchar(5) not null,
+harga_paket integer not null,
+primary key (id_paket)
+);
+create table menu (
+id_menu varchar(5) not null,
+nama_menu varchar(30) not null,
+jenis_menu varchar(30) not null,
+id_paket varchar(5) not null,
+primary key (id_menu),
+foreign key (id_paket) references paket(id_paket)
+);
+create table transacEon (
+id_customer varchar(5) not null,
+id_paket varchar(5) not null,
+id_employee varchar(5) not null,
+transacEon_date date not null,
+foreign key (id_customer) references customer(id_customer),
+foreign key (id_paket) references paket(id_paket),
+foreign key (id_employee) references employee(id_employee)
+);
+
+
+insert into employee (id_employee, nama_depan,
+nama_belakang, jabatan, alamat, email, nomor_telepon, gaji)
+values ('E0001', 'Anthony', null, 'Manager', '70 Cool Guy',
+'anthony@umn.ac.id', '123-456-4565', 5000000),
+('E0002', 'Akino', 'Archilles', 'Chef', '21 Kino Kino',
+'akino@student.com', '354-124-5786', 3500000),
+('E0003', 'Kevin', 'Alexander', 'Cashier', '34 Nishinoya',
+'alex@yahoo.com', '098-123-7832', 3000000),
+('E0004', 'Ivy', 'Marcia', 'Chef', '06 Wall Street',
+'ivy@yahoo.com', '846-732-8427', 3500000),
+('E0005', 'Martha', 'Saphia', 'Customer Service', '78 Ruby Fort',
+'martha@umn.ac.id', '718-298-2873', 3200000),
+('E0006', 'Nofiandy', null, 'Cashier', '03 Smooth Hair',
+'nofiandy@gmail.com', '516-927-9268', 3250000),
+('E0007', 'Octavany', null, 'Cashier', '23 Relaxing Cafe',
+'octa@iseng.com', '654-876-1928', 3150000);
+
+insert into customer (id_customer, nama_depan, nama_belakang,
+alamat, email, nomor_telepon)
+values ('C0001', 'Michael', 'Oswin', '125 Laugh Land',
+'oswin@yahoo.com', '745-387-2874'),
+('C0002', 'Anna', 'Jeane', '163 Lolita Land',
+'anna@gmail.com', '982-397-4862'),
+('C0003', 'Raymond', null, '287 Chucky Suburb',
+'raymond@gmail.com', '917-376-4672'),
+('C0004', 'Theodore', 'Mullia', '287 Idea Annex',
+'mulia@gmail.com', '122-187-1111'),
+('C0005', 'Niki', 'Emersan', '297 Cult Annex', 'niki@yahoo.com',
+'198-292-2223'),
+('C0006', 'ChrisEne', 'Liviani', '275 Love Annex',
+'liviani@live.com', '000-198-2836'),
+('C0007', 'Hermawan', null, '212 Tall Building',
+'hermawan@yahoo.com', '192-168-1001'),
+('C0008', 'Agung', null, '293 Short Building',
+'agung@yahoo.com', '192-168-1993'),
+('C0009', 'Samuel', 'Sandro', '206 Oppa Annex', 'sam@live.com',
+'192-168-2973'),
+('C0010', 'Kennard', 'Alcander', '202 Brother Annex',
+'ken@live.com', '198-782-3864');
+
+insert into paket (id_paket, harga_paket)
+values ('P0001', 3000000),
+('P0002', 2500000),
+('P0003', 2000000);
+
+insert into menu (id_menu, nama_menu, jenis_menu, id_paket)
+values ('M0001', 'Nasi Goreng Cinta', 'Makanan', 'P0001'),
+('M0002', 'Ayam Bumbu PHP', 'Makanan', 'P0002'),
+('M0003', 'Soto Daging CPP', 'Makanan', 'P0003'),
+('M0004', 'Siomay Pak BoBi', 'Makanan', 'P0001'),
+('M0005', 'Blue Integer', 'Minuman', 'P0001'),
+('M0006', 'Mocha Float', 'Dessert', 'P0003'),
+('M0007', 'Chocho Banana Split', 'Dessert', 'P0002'),
+('M0008', 'Es Teh Panas', 'Minuman', 'P0002'),
+('M0009', 'Nasi Micin', 'Makanan', 'P0002'),
+('M0010', 'Sapi Chabe', 'Makanan', 'P0003');
+
+
+insert into transacEon (id_customer, id_employee, id_paket,
+transacEon_date)
+values ('C0001', 'E0002', 'P0003', '2016-02-25'),
+('C0002', 'E0001', 'P0002', '2016-03-12'),
+('C0003', 'E0002', 'P0002', '2016-04-10'),
+('C0004', 'E0004', 'P0001', '2016-06-28'),
+('C0005', 'E0001', 'P0002', '2016-03-30'),
+('C0006', 'E0003', 'P0003', '2016-03-10'),
+('C0007', 'E0005', 'P0001', '2016-03-01'),
+('C0008', 'E0002', 'P0002', '2016-08-30'),
+('C0009', 'E0002', 'P0003', '2016-11-02'),
+('C0010', 'E0005', 'P0001', '2016-08-18');
+
+select * from menu;
+
+select nama_depan as 'Nama Depan', nama_belakang as 'Nama
+Belakang'
+from employee
+where jabatan = 'Cashier';
+
+select id_paket as 'ID Paket', harga_paket as 'Harga Awal',
+harga_paket-(harga_paket*0.30) as 'Harga Akhir'
+from paket;
+
+
+select sum(gaji) as 'Total Gaji'
+from employee;
+
+select nama_depan as 'Nama Depan', nama_belakang as 'Nama
+Belakang', jabatan as 'Jabatan', email as 'Email'
+from employee
+where email like '%@yahoo.com';
+
+
+select nama_depan as 'Nama Depan', nama_belakang as 'Nama
+Belakang', jabatan as 'Jabatan', gaji as 'Gaji'
+from employee
+where gaji < 3800000;
+
+select nama_depan as 'Nama Depan', nama_belakang as 'Nama
+Belakang', concat(lower(nama_depan), '@restoswin.rs.id') as
+'Email Khusus'
+from employee;
